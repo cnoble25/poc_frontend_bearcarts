@@ -18,6 +18,24 @@ npm run build      # production build to dist/
 
 To test on a phone, run `npx vite --host`, or tunnel with `ngrok http 5173`.
 
+## Run in Docker
+
+The image builds the app, then serves the static files with an unprivileged nginx on port 8080.
+
+```sh
+docker compose up -d --build   # http://localhost:8080
+docker compose down            # stop it
+```
+
+Or without Compose:
+
+```sh
+docker build -t bearcarts-frontend .
+docker run -d -p 8080:8080 bearcarts-frontend
+```
+
+After code changes, rebuild with `docker compose up -d --build`. The container serves a fixed build, so it doesn't hot-reload like `npm run dev`.
+
 ## Where things live
 
 | Path | What |
